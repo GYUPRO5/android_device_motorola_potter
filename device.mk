@@ -105,7 +105,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.msm8953 \
     libbson \
-    libshim_camera
+    Snap
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/camera/msm8953_mot_potter_camera.xml:system/etc/camera/msm8953_mot_potter_camera.xml \
