@@ -14,7 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Inherit common some CM stuff.
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+
 $(call inherit-product, device/motorola/potter/full_potter.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
