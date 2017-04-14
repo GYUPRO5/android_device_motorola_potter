@@ -44,6 +44,7 @@ bin/btnvtool
 bin/hci_qcomm_init
 vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so
 vendor/lib/libaptXScheduler.so
+vendor/lib/libbt-vendor.so
 vendor/lib/libbtnv.so
 
 # Camera
