@@ -14,11 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit common some CM stuff.
-
+# Inherit common some Aosp stuff.
 $(call inherit-product, device/motorola/potter/full_potter.mk)
 
+# Inherit from potter device
+$(call inherit-product, device/motorola/potter/device.mk)
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+$(call inherit-product-if-exists, vendor/motorola/potter/potter-vendor.mk)
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
@@ -29,6 +33,7 @@ PRODUCT_DEVICE := potter
 PRODUCT_NAME := potter
 PRODUCT_BRAND := motorola
 PRODUCT_MANUFACTURER := motorola
+PRODUCT_DEVICE := potter
 
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST := ro.product.model
 
