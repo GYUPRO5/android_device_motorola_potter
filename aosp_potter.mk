@@ -18,11 +18,7 @@
 
 $(call inherit-product, device/motorola/potter/full_potter.mk)
 
-$(call inherit-product-if-exists, vendor/gapps/arm-phone-gapps.mk)
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
-export WITH_GAPPS=true
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
