@@ -221,6 +221,13 @@ on boot
 
     # FPC home button permissions
     chown system system /sys/homebutton/enable
+    chown system system /sys/homebutton/key
+    chown system system /sys/homebutton/key_hold
+    chown system system /sys/homebutton/key_up
+    chown system system /sys/homebutton/key_down
+    chown system system /sys/homebutton/key_dbltap
+    chown system system /sys/homebutton/key_left
+    chown system system /sys/homebutton/key_right
 
     # Display
     chown system graphics /sys/class/graphics/fb1/hpd
@@ -598,13 +605,13 @@ service config_bt_addr /system/bin/btnvtool -O
     group bluetooth radio
     oneshot
 
-service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
+service config_bluetooth /system/bin/hci_qcomm_init -e -p 0 -P 1
     class core
     user bluetooth
-    group bluetooth system
+    group bluetooth system net_bt_admin
     oneshot
 
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
+service hciattach /system/bin/sh /init.qcom.bt.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
@@ -796,6 +803,9 @@ service iprenew_wigig0 /system/bin/dhcpcd -n
 
 on property:wifi.ftmd.load=true
     insmod /system/lib/modules/pronto/pronto_wlan.ko con_mode=5
+
+on property:ro.hw.dtv=true
+    insmod /system/lib/modules/isdbt.ko
 
 service wlan_logging /system/bin/cnss_diag -q -f
     class main
