@@ -227,7 +227,8 @@ PRODUCT_PACKAGES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.mmi.touch.sh \
-    init.qcom.ril.sh
+    init.qcom.ril.sh \
+    wlan_carrier_bin.sh
 
 PRODUCT_PACKAGES += \
     fstab.qcom \
@@ -235,6 +236,7 @@ PRODUCT_PACKAGES += \
     init.mmi.laser.sh \
     init.mmi.rc \
     init.mmi.usb.rc \
+    init.oem.hw.sh \
     init.qcom.rc \
     ueventd.qcom.rc
 

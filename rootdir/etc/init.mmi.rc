@@ -123,8 +123,6 @@ on post-fs-data
 
     # Permissions for phone power off log
     mkdir /data/power_log 0750 root log
-    chmod 0660 /sys/module/power_supply_log/parameters/log_file
-    write /sys/module/power_supply_log/parameters/log_file /data/power_log/power_off.log
 
     # Subsystem RAM-dumps
     mkdir /data/ss-ram-dumps 0750 system log
@@ -164,6 +162,15 @@ on boot
    # STML0 driver parameter permissions
    chown root mot_tcmd /sys/module/stml0xx/parameters/irq_disable
    chmod 0660 /sys/module/stml0xx/parameters/irq_disable
+
+   chown root mot_tcmd /sys/module/phy_msm_usb/parameters/host_mode_disable
+   chmod 0660 /sys/module/phy_msm_usb/parameters/host_mode_disable
+   chown root mot_tcmd /sys/devices/soc/7000000.ssusb/disable_id_pin
+   chmod 0220 /sys/devices/soc/7000000.ssusb/disable_id_pin
+    
+   # change permission for capsensor
+   chmod 0660 /sys/class/capsense/enable
+   chown system system sys/class/capsense/enable
 
    #STML0 device permissions
    chown system compass /dev/stml0xx
@@ -252,6 +259,13 @@ on boot
    # Quiet binder logs
    write /sys/module/binder/parameters/debug_mask 0x5
 
+# Pass carrier to wlan
+service init_wifi /system/bin/wlan_carrier_bin.sh
+    class main
+    user root
+    group root
+    oneshot
+
 on charger
     trigger early-fs
     trigger fs
@@ -297,16 +311,25 @@ service fingerprintd /system/bin/fingerprintd
     group input
 
 service mmi-boot-sh /system/bin/init.mmi.boot.sh
+    seclabel u:r:mmi_boot:s0
     class core
     user root
     oneshot
 
 service mmi-laser-sh /system/bin/init.mmi.laser.sh
+    seclabel u:r:mmi_laser:s0
     class core
     user root
     oneshot
 
 service mmi-touch-sh /system/bin/init.mmi.touch.sh
+    seclabel u:r:mmi_touch:s0
+    class core
+    user root
+    oneshot
+
+service oem-hw-sh /system/bin/init.oem.hw.sh
+    seclabel u:r:oem-hw-sh:s0
     class core
     user root
     oneshot
